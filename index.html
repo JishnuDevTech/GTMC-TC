@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leaving Certificate Manager</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== APP SHELL (screen only) ===================== -->
+  <div class="app">
+
+    <header class="topbar no-print">
+      <div class="topbar-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="28" height="28">
+            <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M24 10 L27 17 L24 24 L21 17 Z" fill="currentColor"/>
+            <path d="M24 38 L27 31 L24 24 L21 31 Z" fill="currentColor"/>
+            <path d="M10 24 L17 21 L24 24 L17 27 Z" fill="currentColor"/>
+            <path d="M38 24 L31 21 L24 24 L31 27 Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <div>
+          <h1>Leaving Certificate Manager</h1>
+          <p id="instituteNameTopbar">Loading institute settings…</p>
+        </div>
+      </div>
+      <div id="connStatus" class="conn-status conn-pending">Connecting…</div>
+    </header>
+
+    <nav class="tabs no-print" role="tablist">
+      <button class="tab-btn active" data-tab="form" role="tab">New / Edit Certificate</button>
+      <button class="tab-btn" data-tab="records" role="tab">Records</button>
+      <button class="tab-btn" data-tab="settings" role="tab">Institute Settings</button>
+    </nav>
+
+    <main class="content no-print">
+
+      <!-- ============ TAB: FORM ============ -->
+      <section id="tab-form" class="tab-panel active">
+        <div class="grid-2">
+
+          <form id="lcForm" class="card form-card" autocomplete="off">
+            <div class="card-head">
+              <h2>Certificate Details</h2>
+              <span id="editingBadge" class="badge hidden">Editing existing record</span>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f_tcNo">TC No.</label>
+                <input type="text" id="f_tcNo" placeholder="e.g. 286" required />
+                <p class="hint" id="tcNoHint">Next number will be assigned automatically.</p>
+              </div>
+              <div class="field">
+                <label for="f_enrollmentNo">Enrollment No.</label>
+                <input type="text" id="f_enrollmentNo" placeholder="e.g. 1" />
+              </div>
+              <div class="field">
+                <label for="f_eligibilityNo">Eligibility No. / PRN</label>
+                <input type="text" id="f_eligibilityNo" placeholder="e.g. 2502508111907008" />
+              </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="field-row">
+              <div class="field field-wide">
+                <label for="f_name">Student Name</label>
+                <input type="text" id="f_name" placeholder="Full name" required />
+              </div>
+              <div class="field">
+                <label for="f_motherName">Mother's Name</label>
+                <input type="text" id="f_motherName" placeholder="Mother's name" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f_religion">Religion</label>
+                <input type="text" id="f_religion" placeholder="e.g. Hindu" />
+              </div>
+              <div class="field">
+                <label for="f_caste">Caste / Sub Caste</label>
+                <input type="text" id="f_caste" placeholder="e.g. Dhangar" />
+              </div>
+              <div class="field">
+                <label for="f_nationality">Nationality</label>
+                <input type="text" id="f_nationality" value="Indian" placeholder="e.g. Indian" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f_placeOfBirth">Place of Birth</label>
+                <input type="text" id="f_placeOfBirth" placeholder="e.g. Kunbi" />
+              </div>
+              <div class="field">
+                <label for="f_dob">Date of Birth</label>
+                <input type="date" id="f_dob" />
+              </div>
+              <div class="field field-wide">
+                <label for="f_dobWords">Date of Birth — In Words</label>
+                <input type="text" id="f_dobWords" placeholder="auto-fills from Date of Birth" />
+              </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="field-row">
+              <div class="field field-wide">
+                <label for="f_lastSchool">Last School / College</label>
+                <input type="text" id="f_lastSchool" placeholder="Name, taluka, district" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f_dateAdmission">Date of Admission</label>
+                <input type="date" id="f_dateAdmission" />
+              </div>
+              <div class="field">
+                <label for="f_progress">Progress / Conduct</label>
+                <input type="text" id="f_progress" placeholder="e.g. Good" />
+              </div>
+              <div class="field">
+                <label for="f_dateLeaving">Date of Leaving</label>
+                <input type="date" id="f_dateLeaving" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f_yearStudying">Year in Which Studying</label>
+                <input type="text" id="f_yearStudying" placeholder="e.g. 2025-2026" />
+              </div>
+              <div class="field field-wide">
+                <label for="f_reasonLeaving">Reason of Leaving</label>
+                <input type="text" id="f_reasonLeaving" placeholder="e.g. As per application" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field field-full">
+                <label for="f_remark">Remark</label>
+                <textarea id="f_remark" rows="2" placeholder="e.g. B.Tech Food Tec. First Year exam form not filled — 2025"></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" id="resetFormBtn" class="btn btn-ghost">Clear Form</button>
+              <button type="submit" id="saveBtn" class="btn btn-primary">Save Certificate</button>
+            </div>
+            <p id="formMsg" class="form-msg" role="status"></p>
+          </form>
+
+          <!-- LIVE PREVIEW that mirrors what gets printed -->
+          <div class="card preview-card">
+            <div class="card-head">
+              <h2>Print Preview</h2>
+              <button type="button" id="printBtn" class="btn btn-secondary" disabled>Print this Certificate</button>
+            </div>
+            <div class="preview-frame">
+              <div id="certPreview" class="certificate">
+                <!-- populated by JS, see #certificateTemplate -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ TAB: RECORDS ============ -->
+      <section id="tab-records" class="tab-panel">
+        <div class="card">
+          <div class="card-head">
+            <h2>Saved Certificates</h2>
+            <input type="search" id="recordSearch" placeholder="Search by name, TC no., enrollment no…" />
+          </div>
+          <div class="table-wrap">
+            <table id="recordsTable">
+              <thead>
+                <tr>
+                  <th>TC No.</th>
+                  <th>Name</th>
+                  <th>Mother's Name</th>
+                  <th>Date of Leaving</th>
+                  <th>Last School</th>
+                  <th class="col-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recordsTbody">
+                <tr><td colspan="6" class="empty-row">Connect Firebase to see saved records here.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB: SETTINGS ============ -->
+      <section id="tab-settings" class="tab-panel">
+        <div class="card" style="max-width:640px;">
+          <div class="card-head">
+            <h2>Institute Settings</h2>
+          </div>
+          <p class="hint" style="margin-top:-4px;margin-bottom:16px;">These appear on the printed certificate header/footer. Saved to Firebase, so every certificate stays in sync.</p>
+          <div class="field-row">
+            <div class="field field-full">
+              <label for="s_mandalName">Trust / Mandal Line</label>
+              <input type="text" id="s_mandalName" placeholder="e.g. Gramin Shikshan Prasarak Mandal's" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field field-full">
+              <label for="s_instituteName">Institute Name</label>
+              <input type="text" id="s_instituteName" placeholder="e.g. GRAMIN TECHNICAL & MANAGEMENT CAMPUS" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field field-full">
+              <label for="s_address">Address Line</label>
+              <input type="text" id="s_address" placeholder="e.g. Vishnupuri, Nanded - 431 606 (M.S.)" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="s_place">Issuing Place</label>
+              <input type="text" id="s_place" placeholder="e.g. Nanded" />
+            </div>
+            <div class="field">
+              <label for="s_logo">Logo image URL (optional)</label>
+              <input type="text" id="s_logo" placeholder="https://… or leave blank for placeholder" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
+          </div>
+          <p id="settingsMsg" class="form-msg" role="status"></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===================== PRINT-ONLY CERTIFICATE ===================== -->
+  <!-- This block is invisible on screen, and is the ONLY thing visible when printing. -->
+  <div id="printArea" class="print-only">
+    <div id="certPrint" class="certificate certificate-print">
+      <!-- populated by JS at print time, structure mirrors #certificateTemplate -->
+    </div>
+  </div>
+
+  <!-- Template used to render certificate markup (used for both preview + print) -->
+  <template id="certificateTemplate">
+    <div class="cert-header">
+      <div class="cert-logo">
+        <img class="cert-logo-img hidden" alt="Institute logo" />
+        <svg class="cert-logo-placeholder" viewBox="0 0 64 64" width="58" height="58">
+          <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="3"/>
+          <path d="M32 10 L37 22 L32 32 L27 22 Z" fill="currentColor"/>
+          <path d="M32 54 L37 42 L32 32 L27 42 Z" fill="currentColor"/>
+          <path d="M10 32 L22 27 L32 32 L22 37 Z" fill="currentColor"/>
+          <path d="M54 32 L42 27 L32 32 L42 37 Z" fill="currentColor"/>
+          <circle cx="32" cy="32" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div class="cert-header-text">
+        <p class="cert-mandal" data-field="mandalName"></p>
+        <h2 class="cert-institute" data-field="instituteName"></h2>
+        <p class="cert-address" data-field="address"></p>
+        <div class="cert-title-bar">LEAVING CERTIFICATE</div>
+      </div>
+      <div class="cert-tcno">TC.<span data-field="tcNo"></span></div>
+    </div>
+
+    <p class="cert-disclaimer">No change in any entry in this certificate shall be made except by the authority issuing it, and any unauthorised change is liable to invoke the imposition of penalty such as that of rustication.</p>
+
+    <div class="cert-body">
+      <div class="cert-row"><span class="cert-label">Enrollment No.</span><span class="cert-colon">:</span><span class="cert-value" data-field="enrollmentNo"></span></div>
+      <div class="cert-row"><span class="cert-label">Eligibility No. / PRN</span><span class="cert-colon">:</span><span class="cert-value" data-field="eligibilityNo"></span></div>
+      <div class="cert-row"><span class="cert-label">Name</span><span class="cert-colon">:</span><span class="cert-value cert-value-strong" data-field="name"></span></div>
+      <div class="cert-row"><span class="cert-label">Mother's Name</span><span class="cert-colon">:</span><span class="cert-value" data-field="motherName"></span></div>
+      <div class="cert-row"><span class="cert-label">Religion</span><span class="cert-colon">:</span><span class="cert-value" data-field="religion"></span></div>
+      <div class="cert-row"><span class="cert-label">Caste / Sub Caste</span><span class="cert-colon">:</span><span class="cert-value" data-field="caste"></span></div>
+      <div class="cert-row"><span class="cert-label">Nationality</span><span class="cert-colon">:</span><span class="cert-value" data-field="nationality"></span></div>
+      <div class="cert-row"><span class="cert-label">Place of Birth</span><span class="cert-colon">:</span><span class="cert-value" data-field="placeOfBirth"></span></div>
+      <div class="cert-row"><span class="cert-label">Date of Birth</span><span class="cert-colon">:</span><span class="cert-value" data-field="dob"></span></div>
+      <div class="cert-row"><span class="cert-label">In Words</span><span class="cert-colon">:</span><span class="cert-value" data-field="dobWords"></span></div>
+      <div class="cert-row"><span class="cert-label">Last School</span><span class="cert-colon">:</span><span class="cert-value" data-field="lastSchool"></span></div>
+      <div class="cert-row"><span class="cert-label">Date of Admission</span><span class="cert-colon">:</span><span class="cert-value" data-field="dateAdmission"></span></div>
+      <div class="cert-row"><span class="cert-label">Progress / Conduct</span><span class="cert-colon">:</span><span class="cert-value" data-field="progress"></span></div>
+      <div class="cert-row"><span class="cert-label">Date of Leaving</span><span class="cert-colon">:</span><span class="cert-value" data-field="dateLeaving"></span></div>
+      <div class="cert-row"><span class="cert-label">Year in Which Studying</span><span class="cert-colon">:</span><span class="cert-value" data-field="yearStudying"></span></div>
+      <div class="cert-row"><span class="cert-label">Reason of Leaving</span><span class="cert-colon">:</span><span class="cert-value" data-field="reasonLeaving"></span></div>
+      <div class="cert-row"><span class="cert-label">Remark</span><span class="cert-colon">:</span><span class="cert-value" data-field="remark"></span></div>
+    </div>
+
+    <p class="cert-certify">Certified that the above information is in accordance with the register and previous Leaving Certificate of this institute.</p>
+
+    <div class="cert-footer">
+      <p><strong>Date:</strong> <span data-field="issueDate"></span></p>
+      <p><strong>Place:</strong> <span data-field="issuePlace"></span></p>
+    </div>
+
+    <div class="cert-signatures">
+      <div class="sig"><span class="sig-line"></span><span>Clerk</span></div>
+      <div class="sig"><span class="sig-line"></span><span>Office Superintendent</span></div>
+      <div class="sig"><span class="sig-line"></span><span>Principal</span></div>
+    </div>
+  </template>
+
+  <!-- Firebase SDKs (compat build = simple script tags, no bundler needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
