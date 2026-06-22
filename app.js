@@ -121,7 +121,7 @@
     instituteName: "GRAMIN TECHNICAL & MANAGEMENT CAMPUS",
     address: "Vishnupuri, Nanded - 431 606 (M.S.)",
     place: "Nanded",
-    logoUrl: ""
+    logoUrl: "images.jpeg"
   };
 
   function applySettingsToUI() {
